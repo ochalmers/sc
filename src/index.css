@@ -9,8 +9,8 @@
 }
 
 :root{
-  --paper: 237 239 232;
-  --ink: 8 8 8;
+  --paper: 247 246 243;
+  --ink: 18 18 18;
 }
 
 html{
@@ -25,6 +25,10 @@ body{
 }
 
 ::selection{
-  background: rgba(47,44,255,.18);
+  background: rgba(58,57,255,.16);
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
 }
 
