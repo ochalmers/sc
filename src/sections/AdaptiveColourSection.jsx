@@ -151,7 +151,7 @@ export default function AdaptiveColourSection({ content }) {
       id="adaptive-colour"
       className={`scroll-mt-24 py-20 md:py-28 transition-colors duration-500 ${bgTint}`}
     >
-      <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8 md:gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] xl:grid-cols-[240px_1fr] gap-8 md:gap-12 lg:gap-16">
         <Reveal className="md:sticky md:top-28 self-start">
           <div className="text-[12px] uppercase tracking-[0.2em] text-ink-600">
             Product capability

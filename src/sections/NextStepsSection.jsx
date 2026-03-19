@@ -3,7 +3,7 @@ import { Reveal } from "../components/Motion";
 export default function NextStepsSection({ content }) {
   return (
     <section id="next" className="scroll-mt-24 py-22 md:py-30">
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12 lg:gap-16 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(200px,300px)] gap-12 lg:gap-20 items-start">
         <div className="min-w-0">
           <Reveal>
             <div className="text-[12px] uppercase tracking-[0.2em] text-ink-600">Conclusion</div>

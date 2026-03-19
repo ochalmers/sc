@@ -3,6 +3,18 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
+      maxWidth: {
+        site: "min(1600px, calc(100vw - 3rem))",
+        content: "min(1400px, calc(100vw - 2rem))",
+      },
+      gridTemplateColumns: {
+        "12": "repeat(12, minmax(0, 1fr))",
+      },
+      spacing: {
+        "18": "4.5rem",
+        "22": "5.5rem",
+        "30": "7.5rem",
+      },
       fontFamily: {
         sans: ["Aeonik", "Inter", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
       },

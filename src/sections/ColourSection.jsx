@@ -1,4 +1,4 @@
-import { Reveal } from "../components/Motion";
+import { Reveal, ScaleReveal } from "../components/Motion";
 
 function Swatches({ swatches }) {
   return (
@@ -62,7 +62,7 @@ function PalettePanel({ d, idx }) {
   const accentB = d.swatches[3] ?? "#4FD6BE";
 
   return (
-    <Reveal delay={0.06 * idx}>
+    <ScaleReveal delay={0.06 * idx}>
       <section className="relative overflow-hidden rounded-[28px] border border-black/10">
         <div className="absolute inset-0" style={{ background: bg }} />
         <div className="absolute inset-0 opacity-[0.12] [mask-image:radial-gradient(55%_60%_at_70%_30%,black,transparent)]">
@@ -94,14 +94,14 @@ function PalettePanel({ d, idx }) {
           </div>
         </div>
       </section>
-    </Reveal>
+    </ScaleReveal>
   );
 }
 
 export default function ColourSection({ content }) {
   return (
     <section id="colour" className="scroll-mt-24 py-20 md:py-28">
-      <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8 md:gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] xl:grid-cols-[240px_1fr] gap-8 md:gap-12 lg:gap-16">
         <Reveal className="md:sticky md:top-28 self-start">
           <div className="text-[12px] uppercase tracking-[0.2em] text-ink-600">Colour</div>
           <h2 className="mt-3 text-[28px] md:text-[34px] leading-[1.05] tracking-editorial text-ink-950">

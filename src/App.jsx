@@ -11,7 +11,7 @@ import NextStepsSection from "./sections/NextStepsSection";
 function Topbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-black/10 bg-paper-100/70 backdrop-blur">
-      <div className="mx-auto max-w-[1200px] px-5 md:px-8 py-4 flex items-center justify-between gap-6">
+        <div className="mx-auto w-full max-w-site px-5 sm:px-6 md:px-10 lg:px-12 py-4 flex items-center justify-between gap-6">
         <div className="flex items-center gap-3">
           <img src="/Images/Logo.svg" alt="Sonocea" className="h-6 w-auto opacity-90" />
           <div className="text-sm tracking-tightish text-ink-700 hidden sm:block">
@@ -49,8 +49,8 @@ export default function App() {
       </a>
 
       <Topbar />
-      <div className="mx-auto max-w-[1200px] px-5 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-14 lg:gap-16">
+      <div className="mx-auto w-full max-w-site px-5 sm:px-6 md:px-10 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-14 lg:gap-20 xl:gap-24">
           <SectionNav items={navItems} />
           <main className="min-w-0">
             <HeroSection

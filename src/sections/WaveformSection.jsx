@@ -33,7 +33,7 @@ export default function WaveformSection({ content }) {
       id="motion"
       className="scroll-mt-24 py-24 md:py-32 bg-ink-950 text-paper-200"
     >
-      <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-10 md:gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] xl:grid-cols-[240px_1fr] gap-10 md:gap-12 lg:gap-16">
         <Reveal className="md:sticky md:top-28 self-start">
           <div className="text-[12px] uppercase tracking-[0.2em] text-white/70">Soundwave & Motion</div>
           <h2 className="mt-3 text-[30px] md:text-[38px] leading-[1.02] tracking-editorial text-paper-200">
