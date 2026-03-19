@@ -27,6 +27,8 @@ Then open the URL shown in the terminal (usually `http://localhost:5173`).
 - **Text & labels**: edit `src/content/siteContent.js`
 - **Persona imagery**: replace the `image` paths in `siteContent.personas.cards[]` (placeholders currently reference files in `Images/`)
 - **Palette values**: edit `siteContent.colour.directions[].swatches`
+- **Adaptive colour modes**: edit `siteContent.adaptiveColour.modes[]` (name, rationale, swatches, bestFor, previewBg, accent, gradientFrom, gradientTo for app preview)
+- **Product flow screens**: edit `siteContent.flow.screens[].image` (paths to `Images/App screens/`)
 - **Logo**: `Images/Logo.svg`
 
 ## Font

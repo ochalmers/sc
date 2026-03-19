@@ -9,6 +9,7 @@ export const siteContent = {
     anchors: [
       { id: "personas", label: "Personas" },
       { id: "colour", label: "Colour exploration" },
+      { id: "adaptive-colour", label: "Adaptive colour" },
       { id: "motion", label: "Soundwave & motion" },
       { id: "flow", label: "Product flow concept" },
       { id: "next", label: "What this unlocks" },
@@ -118,22 +119,66 @@ export const siteContent = {
       {
         title: "Onboarding",
         caption: "A calm entry that frames intent and sets the tone.",
-        image: "/Images/App screens/Onboarding - 13.jpg",
+        image: "/Images/App screens/AppScreens1.jpg",
       },
       {
         title: "Session discovery",
         caption: "Structured paths that reduce choice overload.",
-        image: "/Images/App screens/New Homepage.jpg",
+        image: "/Images/App screens/AppScreens2.jpg",
       },
       {
         title: "Session detail",
         caption: "Clear outcomes and scientific reassurance.",
-        image: "/Images/App screens/Settle & Engage.jpg",
+        image: "/Images/App screens/AppScreens3.jpg",
       },
       {
         title: "Listening screen",
         caption: "Minimal UI; signal-led motion as the anchor.",
-        image: "/Images/App screens/Sooth & Unwind.jpg",
+        image: "/Images/App screens/AppScreens4.jpg",
+      },
+    ],
+  },
+  adaptiveColour: {
+    intro:
+      "Rather than locking Sonocea into a single static palette, we are exploring colour as a flexible system that can support different users, nervous system states, and environments of use. This creates a more accessible and adaptive experience across clinical, personal, and performance contexts.",
+    microcopy:
+      "This moves colour from a static brand choice into a more adaptive product experience.",
+    modes: [
+      {
+        id: "clinical",
+        name: "Clinical Calm",
+        rationale:
+          "A restrained, low-stimulation palette designed for clinical credibility, calm environments, and reduced visual intensity.",
+        bestFor: "Clinical settings, therapy environments, institutional use, sensory-sensitive contexts.",
+        swatches: ["#121212", "#F7F6F3", "#6B7785", "#6C857A", "#D7D7D2", "#9B9B97"],
+        previewBg: "#F7F6F3",
+        accent: "#6C857A",
+        gradientFrom: "#7A8A96",
+        gradientTo: "#6C857A",
+      },
+      {
+        id: "warmth",
+        name: "Human Warmth",
+        rationale:
+          "A softer, more reassuring palette designed to feel supportive, approachable, and emotionally accessible.",
+        bestFor: "Home use, personal wellness, caregiving contexts, emotional support.",
+        swatches: ["#121212", "#F7F6F3", "#B9856E", "#6C857A", "#E6E4DE", "#D4C4B8"],
+        previewBg: "#F5F2EF",
+        accent: "#B9856E",
+        gradientFrom: "#C99B82",
+        gradientTo: "#7A9B8E",
+      },
+      {
+        id: "performance",
+        name: "Performance Focus",
+        rationale:
+          "A sharper, more defined palette designed to support clarity, energy, and performance-oriented environments.",
+        bestFor: "Performance contexts, focus sessions, athletic recovery, professional use.",
+        swatches: ["#121212", "#F7F6F3", "#3A39FF", "#4FD6BE", "#6B7785", "#E8E8E6"],
+        previewBg: "#F4F5F2",
+        accent: "#3A39FF",
+        gradientFrom: "#5B5AFF",
+        gradientTo: "#2B59FF",
       },
     ],
   },

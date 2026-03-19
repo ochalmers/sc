@@ -3,6 +3,7 @@ import { siteContent } from "./content/siteContent";
 import HeroSection from "./sections/HeroSection";
 import PersonaSection from "./sections/PersonaSection";
 import ColourSection from "./sections/ColourSection";
+import AdaptiveColourSection from "./sections/AdaptiveColourSection";
 import WaveformSection from "./sections/WaveformSection";
 import ProductFlowSection from "./sections/ProductFlowSection";
 import NextStepsSection from "./sections/NextStepsSection";
@@ -32,6 +33,7 @@ export default function App() {
   const navItems = [
     { id: "personas", label: "Personas" },
     { id: "colour", label: "Colour exploration" },
+    { id: "adaptive-colour", label: "Adaptive colour" },
     { id: "motion", label: "Soundwave & motion" },
     { id: "flow", label: "Product flow concept" },
     { id: "next", label: "What this unlocks" },
@@ -61,6 +63,7 @@ export default function App() {
             />
             <PersonaSection content={siteContent.personas} />
             <ColourSection content={siteContent.colour} />
+            <AdaptiveColourSection content={siteContent.adaptiveColour} />
             <WaveformSection content={siteContent.motion} />
             <ProductFlowSection content={siteContent.flow} />
             <NextStepsSection content={siteContent.next} />
