@@ -1,26 +1,25 @@
 import { Reveal } from "../components/Motion";
 
-function PhoneMock({ title, accent = "#3A39FF" }) {
+function PhoneMock({ title, image, accent = "#3A39FF" }) {
   return (
     <div className="relative mx-auto w-[260px] sm:w-[280px]">
       <div className="rounded-[34px] border border-black/10 bg-paper-100/70 p-3 shadow-card">
-        <div className="rounded-[28px] border border-black/10 bg-paper-200 overflow-hidden">
-          <div className="px-5 py-4 flex items-center justify-between">
-            <div className="h-2 w-10 rounded-full bg-black/10" />
-            <div className="h-2 w-2 rounded-full bg-black/10" />
+        <div className="rounded-[28px] border border-black/10 overflow-hidden bg-paper-200">
+          <div className="flex items-center justify-between px-4 py-3">
+            <div className="h-1.5 w-8 rounded-full bg-black/10" />
+            <div className="h-1.5 w-1.5 rounded-full bg-black/10" />
           </div>
-          <div className="px-5 pb-5">
-            <div className="text-[12px] uppercase tracking-[0.18em] text-ink-600">{title}</div>
-            <div className="mt-4 h-9 w-4/5 rounded-xl bg-black/8" />
-            <div className="mt-2 h-9 w-3/5 rounded-xl bg-black/8" />
-            <div className="mt-6 h-2 rounded-full bg-black/10 overflow-hidden">
-              <div className="h-full w-2/3 rounded-full" style={{ background: accent, opacity: 0.5 }} />
-            </div>
-            <div className="mt-5 h-[120px] rounded-2xl bg-black/5" />
-            <div className="mt-4 flex gap-2">
-              <div className="h-8 flex-1 rounded-full" style={{ background: accent, opacity: 0.16 }} />
-              <div className="h-8 w-10 rounded-full bg-black/8" />
-            </div>
+          <div className="aspect-[9/19] overflow-hidden">
+            {image ? (
+              <img
+                src={encodeURI(image)}
+                alt=""
+                className="h-full w-full object-cover object-top"
+                loading="lazy"
+              />
+            ) : (
+              <div className="h-full w-full bg-black/5" aria-hidden="true" />
+            )}
           </div>
         </div>
       </div>
@@ -50,7 +49,7 @@ function Step({ step, idx }) {
         </div>
 
         <div className={["lg:col-span-7", isEven ? "lg:order-2" : "lg:order-1 lg:col-span-6"].join(" ")}>
-          <PhoneMock title={step.title} accent={accent} />
+          <PhoneMock title={step.title} image={step.image} accent={accent} />
         </div>
       </div>
     </Reveal>

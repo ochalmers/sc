@@ -115,10 +115,26 @@ export const siteContent = {
     intro:
       "This concept flow demonstrates how personas, colour and soundwave language come together in the app experience. It is a directional prototype rather than a final product design.",
     screens: [
-      { title: "Onboarding", caption: "A calm entry that frames intent and sets the tone." },
-      { title: "Session discovery", caption: "Structured paths that reduce choice overload." },
-      { title: "Session detail", caption: "Clear outcomes and scientific reassurance." },
-      { title: "Listening screen", caption: "Minimal UI; signal-led motion as the anchor." },
+      {
+        title: "Onboarding",
+        caption: "A calm entry that frames intent and sets the tone.",
+        image: "/Images/App screens/Onboarding - 13.jpg",
+      },
+      {
+        title: "Session discovery",
+        caption: "Structured paths that reduce choice overload.",
+        image: "/Images/App screens/New Homepage.jpg",
+      },
+      {
+        title: "Session detail",
+        caption: "Clear outcomes and scientific reassurance.",
+        image: "/Images/App screens/Settle & Engage.jpg",
+      },
+      {
+        title: "Listening screen",
+        caption: "Minimal UI; signal-led motion as the anchor.",
+        image: "/Images/App screens/Sooth & Unwind.jpg",
+      },
     ],
   },
   next: {

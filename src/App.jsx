@@ -30,7 +30,6 @@ function Topbar() {
 
 export default function App() {
   const navItems = [
-    { id: "intro", label: "Hero" },
     { id: "personas", label: "Personas" },
     { id: "colour", label: "Colour exploration" },
     { id: "motion", label: "Soundwave & motion" },
@@ -49,7 +48,8 @@ export default function App() {
 
       <Topbar />
       <div className="mx-auto max-w-[1200px] px-5 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-14 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-14 lg:gap-16">
+          <SectionNav items={navItems} />
           <main className="min-w-0">
             <HeroSection
               content={{
@@ -65,8 +65,6 @@ export default function App() {
             <ProductFlowSection content={siteContent.flow} />
             <NextStepsSection content={siteContent.next} />
           </main>
-
-          <SectionNav items={navItems} />
         </div>
       </div>
     </div>
