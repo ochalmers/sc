@@ -24,6 +24,7 @@ export const siteContent = {
     },
     cards: [
       {
+        id: "regulator",
         title: "The Regulator",
         descriptor: "Adults managing stress, emotional overwhelm, or sleep disruption.",
         examples: [
@@ -37,6 +38,7 @@ export const siteContent = {
         image: "/Images/Component 21.jpg",
       },
       {
+        id: "sensitive-system",
         title: "The Sensitive System",
         descriptor: "Users with sensory sensitivity or neurodivergent conditions.",
         examples: [
@@ -50,6 +52,7 @@ export const siteContent = {
         image: "/Images/Component 13.jpg",
       },
       {
+        id: "supported-user",
         title: "The Supported User",
         descriptor: "Users supported by caregivers or practitioners.",
         examples: ["Children", "Elderly users", "People recovering from illness", "Individuals in therapy"],
@@ -58,6 +61,7 @@ export const siteContent = {
         image: "/Images/Component 24.jpg",
       },
       {
+        id: "performance-seeker",
         title: "The Performance Seeker",
         descriptor: "Focus, recovery, and performance optimisation.",
         examples: ["Athletes", "Founders", "Professionals under pressure", "People seeking cognitive clarity"],

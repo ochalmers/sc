@@ -11,23 +11,30 @@ function buildWavePath({ points = 60, amp = 10, freq = 2.2, phase = 0, bias = 50
   return pts.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(" ");
 }
 
-export function HeroWaveform() {
-  const reduced = useReducedMotion();
+const MODE_WAVEFORM = {
+  clinical: { amp: 6, freq: 1.2, speed: 12 },
+  warmth: { amp: 9, freq: 1.4, speed: 11 },
+  performance: { amp: 8, freq: 2.2, speed: 8 },
+};
 
-  const pathA = buildWavePath({ amp: 8, freq: 1.6, phase: 0, bias: 50 });
-  const pathB = buildWavePath({ amp: 10, freq: 1.6, phase: 0.9, bias: 50 });
-  const pathC = buildWavePath({ amp: 6, freq: 1.6, phase: 1.6, bias: 50 });
+export function HeroWaveform({ mode = "clinical" }) {
+  const reduced = useReducedMotion();
+  const cfg = MODE_WAVEFORM[mode] ?? MODE_WAVEFORM.clinical;
+
+  const pathA = buildWavePath({ amp: cfg.amp, freq: cfg.freq, phase: 0, bias: 50 });
+  const pathB = buildWavePath({ amp: cfg.amp * 1.1, freq: cfg.freq, phase: 0.9, bias: 50 });
+  const pathC = buildWavePath({ amp: cfg.amp * 0.7, freq: cfg.freq, phase: 1.6, bias: 50 });
 
   const animate = reduced
     ? {}
     : {
         y: [0, -2, 0, 2, 0],
-        opacity: [0.65, 0.8, 0.65],
+        opacity: [0.6, 0.8, 0.6],
       };
 
   const transition = reduced
     ? {}
-    : { duration: 9.5, repeat: Infinity, ease: "easeInOut" };
+    : { duration: cfg.speed, repeat: Infinity, ease: "easeInOut" };
 
   return (
     <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full">

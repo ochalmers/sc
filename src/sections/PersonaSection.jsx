@@ -1,128 +1,114 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Reveal, Parallax } from "../components/Motion";
-
-function PersonaPanel({ p }) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const opacity = useTransform(scrollYProgress, [0, 0.12, 0.5, 0.88, 1], [0, 1, 1, 1, 0]);
-
-  return (
-    <motion.article
-      ref={ref}
-      style={{ opacity }}
-      className="min-h-screen w-full flex items-center justify-center py-16 px-6 sm:px-8 md:px-12 lg:px-16"
-    >
-      <div className="w-full max-w-content mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-center min-w-0">
-        <div className="relative aspect-[4/5] max-h-[75vh] rounded-2xl overflow-hidden bg-black/5 lg:col-span-5">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/50" />
-          <Parallax speed={0.15} className="absolute inset-0">
-          <img
-            src={p.image}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover object-center grayscale-[10%] contrast-[1.02] saturate-[0.9]"
-            loading="lazy"
-          />
-          </Parallax>
-        </div>
-
-        <div className="flex flex-col justify-center min-w-0 lg:col-span-7">
-          <div className="text-[12px] uppercase tracking-[0.2em] text-ink-600">Persona</div>
-          <h3 className="mt-3 text-[36px] md:text-[48px] leading-[0.98] tracking-editorial text-ink-950">
-            {p.title}
-          </h3>
-          <p className="mt-5 text-[16px] md:text-[18px] leading-7 text-ink-700 max-w-[58ch] break-words">
-            {p.descriptor}
-          </p>
-
-          <div className="mt-10 space-y-8 text-[14px] md:text-[15px] leading-7 text-ink-700 break-words">
-            <div>
-              <div className="text-[11px] uppercase tracking-[0.18em] text-ink-600">Examples include</div>
-              <ul className="mt-3 space-y-1.5">
-                {p.examples.map((e) => (
-                  <li key={e}>{e}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <div className="text-[11px] uppercase tracking-[0.18em] text-ink-600">Brand interpretation</div>
-                <p className="mt-2">{p.brand}</p>
-              </div>
-              <div>
-                <div className="text-[11px] uppercase tracking-[0.18em] text-ink-600">Product implications</div>
-                <p className="mt-2">{p.product}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.article>
-  );
-}
+import { motion, AnimatePresence } from "framer-motion";
+import { useSystem } from "../context/SystemContext";
+import { Reveal } from "../components/Motion";
+import AppMock from "../components/AppMock";
 
 export default function PersonaSection({ content }) {
-  return (
-    <section id="personas" className="scroll-mt-24 overflow-x-hidden">
-      {/* Intro block */}
-      <div className="py-20 md:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] xl:grid-cols-[240px_1fr] gap-8 md:gap-12 lg:gap-16">
-          <Reveal className="md:sticky md:top-28 self-start">
-            <div className="text-[12px] uppercase tracking-[0.2em] text-ink-600">Personas</div>
-            <h2 className="mt-3 text-[28px] md:text-[34px] leading-[1.05] tracking-editorial text-ink-950">
-              Primary Personas
-            </h2>
-          </Reveal>
-          <Reveal>
-            <p className="max-w-[78ch] text-[15px] md:text-[16px] leading-7 text-ink-700">
-              {content.intro}
-            </p>
-          </Reveal>
-        </div>
-      </div>
+  const { selectedPersona, selectedColourMode, selectPersona } = useSystem();
+  const activePersona = content.cards.find((p) => p.id === selectedPersona) ?? content.cards[0];
 
-      {/* Full-viewport persona panels */}
-      <div className="relative left-1/2 -translate-x-1/2 w-screen overflow-hidden">
-        {content.cards.map((p) => (
-          <PersonaPanel key={p.title} p={p} />
-        ))}
+  // Get colour mode from adaptiveColour - we need it passed in or from context
+  const colourModes = content.colourModes ?? [];
+  const activeMode = colourModes.find((m) => m.id === selectedColourMode) ?? colourModes[0];
+
+  const BG_BY_MODE = { clinical: "bg-paper-200", warmth: "bg-[#F8F6F2]", performance: "bg-[#F6F7F4]" };
+  const sectionBg = BG_BY_MODE[selectedColourMode] ?? "bg-paper-200";
+
+  return (
+    <motion.section
+      id="personas"
+      layout
+      className={`scroll-mt-24 py-20 md:py-28 transition-colors duration-500 ${sectionBg}`}
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center min-w-0">
+        <div className="lg:col-span-5 order-2 lg:order-1">
+          <Reveal>
+            <div className="text-[11px] uppercase tracking-[0.2em] text-ink-500">Personas</div>
+            <h2 className="mt-3 text-[28px] md:text-[36px] leading-[1.04] tracking-editorial text-ink-950">
+              Who uses Sonocea
+            </h2>
+            <p className="mt-5 text-[15px] leading-7 text-ink-700 max-w-[52ch]">{content.intro}</p>
+          </Reveal>
+
+          {/* Persona selector */}
+          <div className="mt-10 space-y-2">
+            {content.cards.map((p) => {
+              const isActive = selectedPersona === p.id;
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => selectPersona(p.id)}
+                  className={`w-full text-left rounded-2xl border px-5 py-4 transition-all duration-300 ${
+                    isActive ? "border-ink-200 bg-white shadow-soft" : "border-black/8 bg-transparent hover:border-black/15 hover:bg-black/[0.02]"
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <span className={`text-[15px] md:text-[16px] font-medium tracking-tight ${isActive ? "text-ink-950" : "text-ink-700"}`}>
+                      {p.title}
+                    </span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="persona-indicator"
+                        className="h-2 w-2 rounded-full bg-ink-950 shrink-0"
+                        transition={{ type: "spring", damping: 28, stiffness: 300 }}
+                      />
+                    )}
+                  </div>
+                  <p className="mt-2 text-[13px] leading-6 text-ink-600 line-clamp-2">{p.descriptor}</p>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="lg:col-span-7 order-1 lg:order-2 flex flex-col items-center lg:items-end">
+          {/* App mock - responds to persona + colour */}
+          {activeMode && (
+            <motion.div
+              key={`persona-mock-${selectedPersona}`}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full max-w-[320px] md:max-w-[360px]"
+            >
+              <AppMock mode={activeMode} size="lg" />
+            </motion.div>
+          )}
+
+          {/* Active persona detail */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedPersona}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.35 }}
+              className="mt-10 w-full max-w-[320px] md:max-w-[360px] lg:max-w-none"
+            >
+              <div className="rounded-2xl border border-black/8 bg-paper-100/60 px-5 py-5">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-ink-500">Selected</div>
+                <h3 className="mt-2 text-[18px] md:text-[20px] font-medium tracking-tight text-ink-950">
+                  {activePersona.title}
+                </h3>
+                <p className="mt-2 text-[13px] leading-6 text-ink-700">{activePersona.brand}</p>
+                <p className="mt-1 text-[13px] leading-6 text-ink-600">{activePersona.product}</p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
 
       {/* Adoption callout */}
-      <div className="py-20 md:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] xl:grid-cols-[240px_1fr] gap-8 md:gap-12 lg:gap-16">
-          <div />
-          <Reveal>
-            <div className="pt-10 border-t border-black/10">
-              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-                <div>
-                  <div className="text-[12px] uppercase tracking-[0.2em] text-ink-600">
-                    {content.adoptionCallout.title}
-                  </div>
-                  <div className="mt-3 text-[16px] md:text-[18px] tracking-tightish text-ink-950">
-                    Supporting adoption contexts
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {content.adoptionCallout.items.map((it) => (
-                    <span
-                      key={it}
-                      className="rounded-full border border-black/10 bg-paper-100/60 px-4 py-2 text-[12px] text-ink-800"
-                    >
-                      {it}
-                    </span>
-                  ))}
-                </div>
-              </div>
+      <div className="mt-20 pt-12 border-t border-black/8">
+        <Reveal>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div>
+              <div className="text-[11px] uppercase tracking-[0.18em] text-ink-500">{content.adoptionCallout.title}</div>
+              <div className="mt-2 text-[14px] text-ink-700">{content.adoptionCallout.items.join(" · ")}</div>
             </div>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </div>
-    </section>
+    </motion.section>
   );
 }
-
